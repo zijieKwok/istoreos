@@ -152,11 +152,20 @@ board_fixup_iface_name() {
 			rename_iface wan eth0
 		fi
 		;;
+	inspur,ihec301)
+		device="$(get_iface_device eth1)"
+		if [[ "$device" = "fe1b0000.ethernet" ]]; then
+			rename_iface eth0 lan
+			rename_iface eth1 eth0
+			rename_iface lan eth1
+		fi
+		;;
 	esac
 }
 
 board_set_iface_smp_affinity() {
 	case $(board_name) in
+	inspur,ihec301|\
 	firefly,rk3568-roc-pc)
 		set_iface_cpumask 2 eth0
 		set_iface_cpumask 4 eth1
@@ -256,7 +265,9 @@ board_set_iface_smp_affinity() {
 		set_iface_cpumask b eth1
 		;;
 	ynn,nas|\
+	le,hes30|\
 	jp,tvbox|\
+	panther,x2|\
 	hsa,bh2)
 		set_iface_cpumask 2 "eth0"
 		;;
@@ -279,32 +290,6 @@ board_wait_wifi() {
 	;;
 	esac
 }
-
-board_otg_defaults() {
-	case $(board_name) in
-	firefly,rk3568-roc-pc)
-		# unknown
-	;;
-	ynn,nas|\
-	jp,tvbox)
-		# default host mode, nothing to do
-	;;
-	friendlyelec,nanopi-r5s|\
-	friendlyelec,nanopi-r5c)
-		# auto switch role
-	;;
-	lyt,t68m|\
-	jsy,h1|\
-	yyy,h1|\
-	idiskk,h1|\
-	fastrhino,r66s|\
-	fastrhino,r68s)
-		echo host >/sys/kernel/debug/usb/fcc00000.dwc3/mode
-	;;
-	esac
-}
-
-board_otg_defaults
 
 board_fixup_iface_name
 
