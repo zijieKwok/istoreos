@@ -400,4 +400,4 @@ do_mount_overlayfs()
 	return 0
 }
 
-[ -n "$1" ] || ( do_mount_overlayfs && exit 0 )
+[ -n "$1" -a "$1" != "start" ] || ( do_mount_overlayfs && exit 0 )
