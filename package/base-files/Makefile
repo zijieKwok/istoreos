@@ -212,6 +212,8 @@ define Package/base-files/install
 	mkdir -p -m 750 \
 		$(1)/root
 
+	touch $(1)/etc/config/ucitrack
+
 	$(LN) /proc/mounts $(1)/etc/mtab
 	$(if $(LIB_SUFFIX),-$(LN) lib $(1)/lib$(LIB_SUFFIX))
 	$(if $(LIB_SUFFIX),-$(LN) lib $(1)/usr/lib$(LIB_SUFFIX))
