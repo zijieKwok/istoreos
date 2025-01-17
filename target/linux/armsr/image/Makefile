@@ -79,10 +79,8 @@ define Device/efi-default
   IMAGE/combined.img.gz := grub-config efi | combined efi | grub-install efi | gzip | append-metadata
   IMAGE/combined.vmdk := grub-config efi | combined efi | grub-install efi | qemu-image vmdk
  ifeq ($(CONFIG_TARGET_IMAGES_GZIP),y)
-    IMAGES-y := rootfs.img.gz
     IMAGES-y += combined.img.gz
   else
-    IMAGES-y := rootfs.img
     IMAGES-y += combined.img
   endif
   ifeq ($(CONFIG_VMDK_IMAGES),y)
