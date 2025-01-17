@@ -19,6 +19,10 @@ endif
 GRUB_SERIAL:=$(call qstrip,$(CONFIG_TARGET_SERIAL))
 
 GRUB_CONSOLE_CMDLINE += console=$(GRUB_SERIAL),$(CONFIG_GRUB_BAUDRATE)n8$(if $(CONFIG_GRUB_FLOWCONTROL),r,)
+ifneq ($(GRUB_SERIAL),ttyAMA0)
+  GRUB_CONSOLE_CMDLINE += console=ttyAMA0,115200n8
+endif
+
 GRUB_SERIAL_CONFIG := serial --unit=0 --speed=$(CONFIG_GRUB_BAUDRATE) --word=8 --parity=no --stop=1 --rtscts=$(if $(CONFIG_GRUB_FLOWCONTROL),on,off)
 
 GRUB_TERMINAL_CONFIG := terminal_input $(GRUB_TERMINALS); terminal_output $(GRUB_TERMINALS) $(if $(GRUB_SERIAL),serial,)
