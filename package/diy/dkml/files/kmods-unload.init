@@ -26,7 +26,7 @@ auto_unload() {
 		for kmod in $function; do
 			if check_driver_bond $kmod; then
 				keep=1
-			else
+			elif [ -d /sys/module/$kmod ] ;then
 				echo "auto rmmod $kmod" >>/dev/kmsg
 				rmmod_r $kmod
 			fi
