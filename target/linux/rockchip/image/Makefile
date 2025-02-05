@@ -52,7 +52,7 @@ define Build/boot-common-legacy
 
 	i=0; \
 	for dts in $(DEVICE_DTS); do \
-		$(CP) $(KDIR)/image-$${dts}.dtb $@.boot/rockchip$$(perl -e 'printf "%b\n",'$$i).dtb; \
+		$(CP) $(KDIR)/image-$${dts##*/}.dtb $@.boot/rockchip$$(perl -e 'printf "%b\n",'$$i).dtb || exit 1; \
 		let i+=1; \
 	done
 	$(LN) rockchip0.dtb $@.boot/rockchip.dtb
