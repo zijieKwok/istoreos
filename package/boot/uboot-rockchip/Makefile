@@ -255,6 +255,7 @@ endef
 define U-Boot/easepi-rk3588
   $(U-Boot/rk3588/Default)
   NAME:=Easepi RK3588
+  DEFAULT:=y
 endef
 
 define U-Boot/nanopc-t6-rk3588
