@@ -19,6 +19,15 @@
 	chosen {
 		stdout-path = "serial2:1500000n8";
 	};
+
+	dummy_1v8: vcc-dummy-1v8-regulator {
+		compatible = "regulator-fixed";
+		regulator-always-on;
+		regulator-boot-on;
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		regulator-name = "dummy_1v8";
+	};
 };
 
 &gmac1 {
@@ -56,6 +65,7 @@
 };
 
 &saradc {
+	vref-supply = <&dummy_1v8>;
 	status = "okay";
 };
 
