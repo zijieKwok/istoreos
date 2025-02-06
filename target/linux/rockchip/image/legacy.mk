@@ -1,7 +1,7 @@
 define Device/friendlyarm_nanopi-r6s
 $(call Device/Legacy)
   DEVICE_VENDOR := FriendlyARM
-  DEVICE_MODEL := NanoPi R6S
+  DEVICE_MODEL := NanoPi R6S/R6C
   SOC := rk3588s
   SUPPORTED_DEVICES += friendlyarm,nanopi-r6s friendlyarm,nanopi-r6c
   SUPPORTED_DEVICES += friendlyelec,nanopi-r6s friendlyelec,nanopi-r6c
