@@ -13,6 +13,16 @@ if test -n "$adc_value"; then
         echo adc $adc_value : board R6C
         setenv hwrev 1
     fi
+else
+    # uboot 2024.10
+    adc single adc@fec10000 5 adc_value
+    if test -n "$adc_value"; then
+        # 844/4096 * 1800000
+        if test "$adc_value" -ge 370898; then
+            echo adc $adc_value : board R6C
+            setenv hwrev 1
+        fi
+    fi
 fi
 
 part uuid mmc ${devnum}:2 uuid
